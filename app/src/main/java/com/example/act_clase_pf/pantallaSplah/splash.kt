@@ -24,18 +24,20 @@ fun SplashScreen(navController: NavController) {
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+            modifier = Modifier.fillMaxSize()
         ) {
-            // Tu logo
+
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground), // <-- cámbialo por tu logo
+                painter = painterResource(id = R.drawable.foro),
                 contentDescription = "Logo",
-                modifier = Modifier.size(150.dp)
+                modifier = Modifier
+                    .fillMaxWidth(0.7f)
+                    .aspectRatio(1f)
             )
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(100.dp))
 
-            // Botón Usuario
             Button(
                 onClick = { navController.navigate("login_usuario") },
                 modifier = Modifier.fillMaxWidth()
@@ -43,19 +45,17 @@ fun SplashScreen(navController: NavController) {
                 Text(text = "Ingresar como Usuario")
             }
 
-            // Botón Artista
             Button(
                 onClick = { navController.navigate("login_artista") },
                 modifier = Modifier.fillMaxWidth()
-            ) {
+            ){
                 Text(text = "Ingresar como Artista")
             }
 
-            // Botón Administrador
             Button(
                 onClick = { navController.navigate("login_admin") },
                 modifier = Modifier.fillMaxWidth()
-            ) {
+            ){
                 Text(text = "Ingresar como Administrador")
             }
         }
