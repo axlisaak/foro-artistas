@@ -53,7 +53,7 @@ fun SplashScreen(navController: NavController) {
         ){
             // El logo siempre es visible.
             Image(
-                painter = painterResource(id = R.drawable.resource_for),
+                painter = painterResource(id = R.drawable.algo_mal),
                 contentDescription = "Logo",
                 modifier = Modifier
                     .fillMaxWidth(0.7f)

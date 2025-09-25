@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.act_clase_pf.foro.ForoScreen
 import com.example.act_clase_pf.login.LoginAdminScreen
 import com.example.act_clase_pf.login.LoginArtistaScreen
 import com.example.act_clase_pf.login.LoginUsuarioScreen
@@ -18,11 +19,13 @@ fun AppNavHost(navController: NavHostController) {
         navController = navController,
         startDestination = "splash"
     ){
-
+        //Navega emtre las pantallas
         composable("splash"){SplashScreen(navController)}
         composable("login_usuario"){ LoginUsuarioScreen(navController)}
         composable("login_artista"){ LoginArtistaScreen(navController)}
         composable("login_admin"){ LoginAdminScreen(navController)}
+        composable("foro") { ForoScreen() }
+
 
     }
 }
