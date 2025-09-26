@@ -25,7 +25,7 @@ fun ForoScreen(foroViewModel: ForoViewModel = viewModel()) {
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
+    ){
         items(posts.value) { post ->
             PostItem(post)
         }
@@ -37,16 +37,22 @@ fun PostItem(post: Post) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
-    ) {
+    ){
         Column(
             modifier = Modifier.padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        ){
             Text(
                 text = post.titulo,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
+            Text(
+                text = "Categoría: ${post.categoria}",
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium
+            )
+
 
             Spacer(modifier = Modifier.height(8.dp))
 
