@@ -4,11 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -19,15 +16,41 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun ForoScreen(foroViewModel: ForoViewModel = viewModel()) {
-    val posts = foroViewModel.posts.collectAsState()
+    val posts = foroViewModel.postsFiltrados.collectAsState()
+    val categorias = listOf("Todos") + foroViewModel.categorias
+    var expanded by remember { mutableStateOf(false) }
+    var selectedCategory by remember { mutableStateOf("Todos") }
+    Column(modifier = Modifier.fillMaxSize()) {
 
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ){
-        items(posts.value) { post ->
-            PostItem(post)
+        //expandir para mostra las categorias
+        Box(modifier = Modifier.padding(16.dp)) {
+            Button(onClick = { expanded = true }) {
+                Text(selectedCategory)
+            }
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false }
+            ){
+                categorias.forEach { categoria ->
+                    DropdownMenuItem(
+                        text = { Text(categoria) },
+                        onClick = {
+                            selectedCategory = categoria
+                            expanded = false
+                            foroViewModel.filtrarPorCategoria(categoria) //aplica el filtro
+                        }
+                    )
+                }
+            }
+        }
+        //lista ya filtrada
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ){
+            items(posts.value) { post ->
+                PostItem(post) }
         }
     }
 }
@@ -52,8 +75,6 @@ fun PostItem(post: Post) {
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium
             )
-
-
             Spacer(modifier = Modifier.height(8.dp))
 
             Image(
@@ -63,9 +84,7 @@ fun PostItem(post: Post) {
                     .fillMaxWidth()
                     .aspectRatio(1f)
             )
-
             Spacer(modifier = Modifier.height(8.dp))
-
             Text(
                 text = "Autor: ${post.autor}",
                 fontSize = 14.sp
