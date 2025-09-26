@@ -20,9 +20,24 @@ fun ForoScreen(foroViewModel: ForoViewModel = viewModel()) {
     val categorias = listOf("Todos") + foroViewModel.categorias
     var expanded by remember { mutableStateOf(false) }
     var selectedCategory by remember { mutableStateOf("Todos") }
+    var searchText by remember { mutableStateOf("") } // 👈 nuevo estado para el buscador
+
     Column(modifier = Modifier.fillMaxSize()) {
 
-        //expandir para mostra las categorias
+        //barra de búsqueda
+        OutlinedTextField(
+            value = searchText,
+            onValueChange = {
+                searchText = it
+                foroViewModel.filtrarPorTexto(searchText) //filtro por texto
+            },
+            label = { Text("Buscar post") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        )
+
+        //expandir para mostrar las categorias
         Box(modifier = Modifier.padding(16.dp)) {
             Button(onClick = { expanded = true }) {
                 Text(selectedCategory)
@@ -30,7 +45,7 @@ fun ForoScreen(foroViewModel: ForoViewModel = viewModel()) {
             DropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false }
-            ){
+            ) {
                 categorias.forEach { categoria ->
                     DropdownMenuItem(
                         text = { Text(categoria) },
@@ -43,14 +58,16 @@ fun ForoScreen(foroViewModel: ForoViewModel = viewModel()) {
                 }
             }
         }
+
         //lista ya filtrada
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
-        ){
+        ) {
             items(posts.value) { post ->
-                PostItem(post) }
+                PostItem(post)
+            }
         }
     }
 }
@@ -89,6 +106,7 @@ fun PostItem(post: Post) {
                 text = "Autor: ${post.autor}",
                 fontSize = 14.sp
             )
+
         }
     }
 }
