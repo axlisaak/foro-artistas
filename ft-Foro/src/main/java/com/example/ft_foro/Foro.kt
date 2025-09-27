@@ -1,4 +1,5 @@
-package com.example.act_clase_pf.foro
+package com.example.ft_foro
+
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*

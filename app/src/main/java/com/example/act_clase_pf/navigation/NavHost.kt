@@ -6,27 +6,25 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.act_clase_pf.foro.ForoScreen
-import com.example.act_clase_pf.login.LoginAdminScreen
-import com.example.act_clase_pf.login.LoginArtistaScreen
-import com.example.act_clase_pf.login.LoginUsuarioScreen
-import com.example.act_clase_pf.pantallaSplah.SplashScreen
-
+import com.example.act_clase_pf.login.LoginScreen
+import com.example.ft_foro.ForoScreen
+import com.example.ft_spalsh.SplashScreen
 
 @Composable
 fun AppNavHost(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = "splash"
-    ){
-        //Navega emtre las pantallas
-        composable("splash"){SplashScreen(navController)}
-        composable("login_usuario"){ LoginUsuarioScreen(navController)}
-        composable("login_artista"){ LoginArtistaScreen(navController)}
-        composable("login_admin"){ LoginAdminScreen(navController)}
+    ) {
+        composable("splash") { SplashScreen(navController) }
+
+        composable("login") { LoginScreen(navController) }
+
         composable("foro") { ForoScreen() }
 
-
+        // Puedes eliminar las rutas antiguas o comentarlas
+        // composable("login_usuario"){ LoginUsuarioScreen(navController)}
+        // composable("login_artista"){ LoginArtistaScreen(navController)}
+        // composable("login_admin"){ LoginAdminScreen(navController)}
     }
 }
-

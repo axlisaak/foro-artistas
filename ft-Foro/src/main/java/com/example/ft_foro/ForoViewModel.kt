@@ -1,9 +1,10 @@
-package com.example.act_clase_pf.foro
+package com.example.ft_foro
+
 
 import androidx.lifecycle.ViewModel
-import com.example.act_clase_pf.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import com.example.ft_foro.R
 
 
 data class Post(

@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
 
-    id("com.google.gms.google-services")version "4.4.3" apply false //firebase
 }
 
 android {
@@ -49,5 +48,3 @@ dependencies {
     implementation( "com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
 }
-
-apply (plugin = "com.google.gms.google-services")
