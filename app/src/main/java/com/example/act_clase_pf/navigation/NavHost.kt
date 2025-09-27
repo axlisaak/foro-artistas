@@ -22,9 +22,5 @@ fun AppNavHost(navController: NavHostController) {
 
         composable("foro") { ForoScreen() }
 
-        // Puedes eliminar las rutas antiguas o comentarlas
-        // composable("login_usuario"){ LoginUsuarioScreen(navController)}
-        // composable("login_artista"){ LoginArtistaScreen(navController)}
-        // composable("login_admin"){ LoginAdminScreen(navController)}
     }
 }
